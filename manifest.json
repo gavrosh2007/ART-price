@@ -1,0 +1,24 @@
+{
+  "name": "ART-Sale | Галерея и Книга искусства",
+  "short_name": "ART-Sale",
+  "start_url": "/ART-Sale/index.html",
+  "scope": "/ART-Sale/",
+  "display": "standalone",
+  "display_override": ["standalone", "minimal-ui"],
+  "theme_color": "#c17b5a",
+  "background_color": "#ffffff",
+  "icons": [
+    {
+      "src": "/ART-Sale/icon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/ART-Sale/icon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ]
+}

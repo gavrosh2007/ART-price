@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>Art Price</title>
+    <title>HM&AP Art Price</title>
     <link rel="manifest" href="manifest.json">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="apple-mobile-web-app-title" content="Art Price">
+    <meta name="apple-mobile-web-app-title" content="HM&AP">
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="theme-color" content="#1e2b4f">
     <style>
@@ -56,7 +56,21 @@
             border: 1px solid rgba(255,255,255,0.3);
         }
         
-        /* Верхняя панель: кнопка "Список" слева, языки справа */
+        /* Логотип HM&AP */
+        .logo {
+            margin-bottom: 15px;
+        }
+        .logo h1 {
+            font-size: 1.8rem;
+            color: #000000;
+            font-weight: bold;
+            letter-spacing: 2px;
+            font-family: 'Courier New', 'American Typewriter', monospace;
+            background: transparent;
+            padding: 0;
+            display: inline-block;
+        }
+        
         .top-bar {
             display: flex;
             justify-content: space-between;
@@ -109,7 +123,6 @@
             color: white;
         }
         
-        /* PWA блок (как в Hermes) */
         .install-area {
             text-align: center;
             margin: 0 0 25px 0;
@@ -288,7 +301,6 @@
             display: none;
         }
         
-        /* Модальное окно для списка владельцев */
         .modal {
             position: fixed;
             top: 0;
@@ -362,6 +374,9 @@
 </head>
 <body>
 <div class="container">
+    <div class="logo">
+        <h1>HM&AP</h1>
+    </div>
     <div class="top-bar">
         <button class="list-btn" id="listButton">📋 <span id="listButtonText">Список</span></button>
         <div class="lang-switch">
@@ -406,19 +421,15 @@
     </div>
 </div>
 
-<!-- Модальное окно со списком владельцев -->
 <div id="ownerModal" class="modal">
     <div class="modal-content">
         <span class="close-modal">&times;</span>
         <h3 id="modalOwnersTitle">📋 Выберите владельца</h3>
-        <div id="ownersListContainer">
-            <!-- список загрузится из JSON -->
-        </div>
+        <div id="ownersListContainer"></div>
     </div>
 </div>
 
 <script>
-    // ========== ДАННЫЕ ВЛАДЕЛЬЦЕВ (ЗАГРУЖАЮТСЯ ИЗ JSON) ==========
     let owners = [];
     let currentOwnerId = null;
     
@@ -432,7 +443,6 @@
             console.warn('owners.json не загружен, создаём демо-владельца');
             owners = [];
         }
-        // Если нет владельцев, создаём одного демо
         if (owners.length === 0) {
             owners = [{
                 id: 1,
@@ -445,7 +455,6 @@
         }
         currentOwnerId = owners[0].id;
         updateBookForOwner(currentOwnerId);
-        // Карточку галереи не трогаем, она общая
     }
     
     function updateBookForOwner(ownerId) {
@@ -482,7 +491,6 @@
         document.getElementById('ownerModal').classList.add('active');
     }
     
-    // ========== ПЕРЕВОД ==========
     const translations = {
         ru: {
             gallery: 'Галерея',
@@ -566,7 +574,6 @@
         });
     }
     
-    // Переключение вкладок
     const galleryToggle = document.getElementById('galleryToggle');
     const bookToggle = document.getElementById('bookToggle');
     const galleryCardWrapper = document.getElementById('galleryCardWrapper');
@@ -585,20 +592,16 @@
         bookContainer.classList.remove('hidden');
     });
     
-    // Переключение языка
     document.querySelectorAll('.lang-btn').forEach(btn => {
         btn.addEventListener('click', (e) => setLanguage(e.target.dataset.lang));
     });
     
-    // Кнопка "Список"
     document.getElementById('listButton').addEventListener('click', showOwnersList);
     
-    // Закрытие модального окна
     const modal = document.getElementById('ownerModal');
     modal.querySelector('.close-modal').addEventListener('click', () => modal.classList.remove('active'));
     window.addEventListener('click', (e) => { if (e.target === modal) modal.classList.remove('active'); });
     
-    // PWA
     let deferredPrompt;
     window.addEventListener('beforeinstallprompt', (e) => {
         e.preventDefault();
@@ -615,12 +618,11 @@
     });
     
     if ('serviceWorker' in navigator) {
-        navigator.serviceWorker.register('/ART-Sale/sw.js')
+        navigator.serviceWorker.register('/ART-Price/sw.js')
             .then(reg => console.log('SW registered'))
             .catch(err => console.error('SW failed', err));
     }
     
-    // Запуск
     loadOwners().then(() => {
         setLanguage('ru');
     });

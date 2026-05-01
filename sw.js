@@ -1,9 +1,19 @@
-const CACHE_NAME = 'art-sale-v1';
+const base = (() => {
+  const path = self.location.pathname.split('/');
+  path.pop();
+  return path.join('/') + '/';
+})();
+
+const CACHE_NAME = 'artprice-v2';
 const urlsToCache = [
-  '/ART-Sale/',
-  '/ART-Sale/index.html',
-  '/ART-Sale/manifest.json',
-  '/ART-Sale/offline.html'
+  base,
+  base + 'index.html',
+  base + 'offline.html',
+  base + 'manifest.json',
+  base + 'icon-192x192.png',
+  base + 'icon-512x512.png',
+  base + '5.jpeg',
+  base + 'owners.json'
 ];
 
 self.addEventListener('install', event => {
@@ -21,8 +31,9 @@ self.addEventListener('fetch', event => {
         if (response) return response;
         return fetch(event.request).catch(() => {
           if (event.request.mode === 'navigate') {
-            return caches.match('/ART-Sale/offline.html');
+            return caches.match(base + 'offline.html');
           }
+          return new Response('Offline', { status: 503 });
         });
       })
   );

@@ -12,7 +12,6 @@
     <meta name="theme-color" content="#1e2b4f">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif; }
-        
         body {
             background-image: url('5.jpeg');
             background-size: cover;
@@ -44,7 +43,6 @@
             background: rgba(30, 43, 79, 0.2);
             z-index: -1;
         }
-        
         .container {
             max-width: 1200px;
             margin: 0 auto;
@@ -55,10 +53,7 @@
             box-shadow: 0 20px 40px rgba(0,0,0,0.1);
             border: 1px solid rgba(255,255,255,0.3);
         }
-        
-        .logo {
-            margin-bottom: 15px;
-        }
+        .logo { margin-bottom: 15px; }
         .logo h1 {
             font-size: 1.8rem;
             color: #000000;
@@ -69,7 +64,6 @@
             padding: 0;
             display: inline-block;
         }
-        
         .top-bar {
             display: flex;
             justify-content: space-between;
@@ -78,7 +72,7 @@
             flex-wrap: wrap;
             gap: 15px;
         }
-        .list-btn {
+        .list-btn, .add-btn {
             background: rgba(255,255,255,0.4);
             backdrop-filter: blur(4px);
             border: 1px solid rgba(255,255,255,0.4);
@@ -92,10 +86,7 @@
             align-items: center;
             gap: 6px;
         }
-        .list-btn:hover {
-            background: rgba(255,255,255,0.7);
-            transform: scale(1.02);
-        }
+        .list-btn:hover, .add-btn:hover { background: rgba(255,255,255,0.7); transform: scale(1.02); }
         .lang-switch {
             display: flex;
             gap: 12px;
@@ -117,11 +108,7 @@
             align-items: center;
             gap: 5px;
         }
-        .lang-btn.active {
-            background: #1e2b4f;
-            color: white;
-        }
-        
+        .lang-btn.active { background: #1e2b4f; color: white; }
         .install-area {
             text-align: center;
             margin: 1rem auto 2rem auto;
@@ -130,10 +117,7 @@
             align-items: center;
             flex-direction: column;
         }
-        .install-tooltip {
-            position: relative;
-            display: inline-block;
-        }
+        .install-tooltip { position: relative; display: inline-block; }
         .pwa-icon-btn {
             background: none;
             border: none;
@@ -149,12 +133,7 @@
             background: transparent;
             transition: 0.2s;
         }
-        .pwa-icon-btn img {
-            width: 96px;
-            height: 96px;
-            border-radius: 12px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-        }
+        .pwa-icon-btn img { width: 96px; height: 96px; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
         .tooltip-text {
             visibility: hidden;
             background-color: #1e2b4f;
@@ -173,26 +152,19 @@
             pointer-events: none;
             z-index: 20;
         }
-        .install-tooltip:hover .tooltip-text {
-            visibility: visible;
-            opacity: 1;
+        .install-tooltip:hover .tooltip-text { visibility: visible; opacity: 1; }
+        @media (max-width: 600px) {
+            .pwa-icon-btn img { width: 64px; height: 64px; }
+            .tooltip-text { white-space: normal; width: 200px; bottom: 130%; }
         }
-        
         .two-columns {
             display: flex;
             flex-wrap: wrap;
             gap: 30px;
             margin-top: 20px;
         }
-        .left-col {
-            flex: 1;
-            min-width: 280px;
-        }
-        .right-col {
-            flex: 1;
-            min-width: 280px;
-        }
-        
+        .left-col { flex: 1; min-width: 280px; }
+        .right-col { flex: 1; min-width: 280px; }
         .glass-toggle {
             background: rgba(255,255,255,0.3);
             backdrop-filter: blur(4px);
@@ -214,69 +186,60 @@
             font-size: 1rem;
             transition: 0.2s;
         }
-        .toggle-btn.active {
-            background: white;
-            color: #1e2b4f;
-            box-shadow: 0 4px 12px rgba(30,43,79,0.2);
+        .toggle-btn.active { background: white; color: #1e2b4f; box-shadow: 0 4px 12px rgba(30,43,79,0.2); }
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin: 1rem 0;
         }
-        
-        .glass-card {
+        .art-card {
             background: rgba(255,255,255,0.3);
-            backdrop-filter: blur(4px);
+            backdrop-filter: blur(8px);
             border-radius: 24px;
             overflow: hidden;
             border: 1px solid rgba(255,255,255,0.4);
+            position: relative;
             cursor: pointer;
             transition: 0.2s;
         }
-        .glass-card:hover {
-            transform: translateY(-6px);
-        }
-        .card-preview {
-            height: 250px;
-            background: rgba(217,226,239,0.5);
+        .art-card:hover { transform: translateY(-4px); }
+        .art-image {
+            width: 100%;
+            height: 200px;
+            background: rgba(0,0,0,0.2);
             display: flex;
             align-items: center;
             justify-content: center;
             font-size: 3rem;
+            overflow: hidden;
         }
-        .card-footer {
-            padding: 20px;
-            text-align: center;
-            font-weight: 600;
-            color: #2a3f6e;
-            background: rgba(255,255,255,0.6);
+        .art-image img { width: 100%; height: 100%; object-fit: cover; }
+        .art-info { padding: 16px; }
+        .art-title { font-weight: bold; font-size: 1.2rem; color: #1e2b4f; }
+        .art-price { color: #c17b5a; font-weight: 600; margin: 5px 0; }
+        .art-collector { font-size: 0.8rem; color: #2a3f6e; }
+        .collector-hidden { color: #999; font-style: italic; }
+        .delete-work {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: rgba(0,0,0,0.5);
+            color: white;
+            border: none;
+            border-radius: 20px;
+            width: 30px;
+            height: 30px;
+            cursor: pointer;
+            font-size: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: 0.2s;
+            z-index: 2;
         }
-        
-        .glass-instructions {
-            background: rgba(255,255,255,0.3);
-            backdrop-filter: blur(4px);
-            border-radius: 24px;
-            padding: 20px;
-            border: 1px solid rgba(255,255,255,0.4);
-            color: #1e2b4f;
-            height: 100%;
-        }
-        .glass-instructions h4 {
-            margin-bottom: 12px;
-            font-size: 1.2rem;
-            border-left: 4px solid #c17b5a;
-            padding-left: 12px;
-        }
-        .glass-instructions p, .glass-instructions ul {
-            margin-bottom: 10px;
-            font-size: 0.9rem;
-        }
-        .glass-instructions ul {
-            padding-left: 20px;
-        }
-        .glass-instructions li {
-            margin-bottom: 5px;
-        }
-        
-        .book-container {
-            margin-top: 20px;
-        }
+        .delete-work:hover { background: #e8491d; }
+        .book-container { margin-top: 20px; }
         .pdf-container {
             height: 70vh;
             border-radius: 24px;
@@ -285,11 +248,7 @@
             backdrop-filter: blur(4px);
             border: 1px solid rgba(255,255,255,0.4);
         }
-        .pdf-container iframe {
-            width: 100%;
-            height: 100%;
-            border: none;
-        }
+        .pdf-container iframe { width: 100%; height: 100%; border: none; }
         .btn-download {
             display: inline-block;
             margin-top: 20px;
@@ -300,41 +259,46 @@
             text-decoration: none;
             font-weight: 600;
         }
-        .hidden {
-            display: none;
-        }
-        
+        .hidden { display: none; }
         .modal {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0,0,0,0.6);
+            background: rgba(0,0,0,0.8);
             backdrop-filter: blur(8px);
             display: none;
             justify-content: center;
             align-items: center;
             z-index: 1000;
         }
-        .modal.active {
-            display: flex;
-        }
+        .modal.active { display: flex; }
         .modal-content {
             background: rgba(255,255,255,0.96);
             border-radius: 32px;
-            max-width: 500px;
+            max-width: 600px;
             width: 90%;
-            max-height: 80vh;
+            max-height: 90vh;
             overflow-y: auto;
             padding: 28px;
             position: relative;
             color: #1e2b4f;
+            text-align: center;
         }
-        .modal-content h3 {
-            margin-bottom: 20px;
-            border-left: 4px solid #c17b5a;
-            padding-left: 15px;
+        .modal-content img {
+            max-width: 100%;
+            max-height: 60vh;
+            border-radius: 20px;
+            object-fit: contain;
+        }
+        .form-group { margin-bottom: 15px; }
+        .form-group label { display: block; font-weight: 600; margin-bottom: 5px; }
+        .form-group input {
+            width: 100%;
+            padding: 10px;
+            border-radius: 30px;
+            border: 1px solid #ccc;
         }
         .owner-item {
             padding: 12px;
@@ -347,17 +311,9 @@
             align-items: center;
             gap: 12px;
         }
-        .owner-item:hover {
-            background: rgba(193,123,90,0.2);
-            transform: translateX(4px);
-        }
-        .owner-emoji {
-            font-size: 1.8rem;
-        }
-        .owner-name {
-            font-size: 1.1rem;
-            font-weight: 500;
-        }
+        .owner-item:hover { background: rgba(193,123,90,0.2); transform: translateX(4px); }
+        .owner-emoji { font-size: 1.8rem; }
+        .owner-name { font-size: 1.1rem; font-weight: 500; }
         .close-modal {
             position: absolute;
             top: 15px;
@@ -367,7 +323,34 @@
             color: #999;
         }
         .close-modal:hover { color: #c17b5a; }
-        
+        .work-list-item {
+            padding: 12px;
+            margin-bottom: 12px;
+            background: rgba(0,0,0,0.03);
+            border-radius: 16px;
+            text-align: left;
+        }
+        .work-list-title { font-weight: bold; font-size: 1.1rem; color: #1e2b4f; }
+        .work-list-price { color: #c17b5a; margin-left: 8px; }
+        .work-list-collector { font-size: 0.85rem; color: #2a3f6e; margin-top: 4px; }
+        footer {
+            text-align: center;
+            margin-top: 3rem;
+            padding: 1.5rem;
+            background: rgba(255,255,255,0.3);
+            backdrop-filter: blur(4px);
+            border-radius: 2rem;
+            font-size: 0.85rem;
+            color: #1e2b4f;
+        }
+        footer p { margin: 0.3rem 0; }
+        footer a {
+            color: #1e2b4f;
+            text-decoration: none;
+            margin: 0 0.3rem;
+            font-weight: 500;
+        }
+        footer a:hover { text-decoration: underline; }
         @media (max-width: 800px) {
             .two-columns { flex-direction: column; }
             .glass-toggle { max-width: 100%; }
@@ -377,11 +360,10 @@
 </head>
 <body>
 <div class="container">
-    <div class="logo">
-        <h1>HM&AP</h1>
-    </div>
+    <div class="logo"><h1>HM&AP</h1></div>
     <div class="top-bar">
-        <button class="list-btn" id="listButton">📋 <span id="listButtonText">Список</span></button>
+        <button class="list-btn" id="listButton">📋 <span id="listButtonText">Список работ</span></button>
+        <button class="add-btn" id="addButton">➕ <span id="addButtonText">Добавить работу</span></button>
         <div class="lang-switch">
             <button class="lang-btn active" data-lang="ru">🇷🇺 РУС</button>
             <button class="lang-btn" data-lang="en">🇬🇧 ENG</button>
@@ -405,230 +387,377 @@
                 <button class="toggle-btn active" id="galleryToggle">Галерея</button>
                 <button class="toggle-btn" id="bookToggle">Книга</button>
             </div>
-            <div id="galleryCardWrapper">
-                <div class="glass-card" id="galleryCard">
-                    <div class="card-preview">📄</div>
-                    <div class="card-footer" id="galleryCardText">работы и цены</div>
+            <div id="galleryContainer">
+                <div class="gallery-grid" id="galleryGrid"></div>
+                <div style="text-align: center; margin-top: 20px;">
+                    <button id="revealCollectorsBtn" class="list-btn" style="background:#1e2b4f; color:white;">🔓 <span id="revealBtnText">Показать имена коллекционеров</span></button>
                 </div>
             </div>
             <div id="bookContainer" class="book-container hidden">
                 <div class="pdf-container">
-                    <iframe id="pdfFrame" src="" allowfullscreen></iframe>
+                    <iframe id="pdfFrame" src="https://drive.google.com/file/d/13Z9w4_ur2c_CxgnIaeu1W5fSQeA_VNoK/preview" allowfullscreen></iframe>
                 </div>
-                <a class="btn-download" id="downloadBtn" href="#">Скачать PDF</a>
+                <a class="btn-download" id="downloadBtn" href="https://drive.google.com/uc?export=download&id=13Z9w4_ur2c_CxgnIaeu1W5fSQeA_VNoK" target="_blank">Скачать PDF</a>
             </div>
         </div>
         <div class="right-col">
             <div class="glass-instructions" id="instructionsBlock"></div>
         </div>
     </div>
+
+    <footer>
+        <div id="footer-ru" style="display: block;">
+            <p>© HM&AP — Цены на искусство</p>
+            <p>
+                <a href="privacy.html">Политика конфиденциальности</a> |
+                <a href="terms.html">Условия использования</a> |
+                <a href="robots.txt" target="_blank">robots.txt</a> |
+                <a href="sitemap.xml" target="_blank">sitemap.xml</a> |
+                <a href="humans.txt" target="_blank">humans.txt</a>
+            </p>
+        </div>
+        <div id="footer-en" style="display: none;">
+            <p>© HM&AP — Art Prices</p>
+            <p>
+                <a href="privacy.html">Privacy Policy</a> |
+                <a href="terms.html">Terms of Use</a> |
+                <a href="robots.txt" target="_blank">robots.txt</a> |
+                <a href="sitemap.xml" target="_blank">sitemap.xml</a> |
+                <a href="humans.txt" target="_blank">humans.txt</a>
+            </p>
+        </div>
+    </footer>
 </div>
 
 <div id="ownerModal" class="modal">
     <div class="modal-content">
         <span class="close-modal">&times;</span>
-        <h3 id="modalOwnersTitle">📋 Выберите владельца</h3>
+        <h3 id="modalOwnersTitle">📋 Список добавленных работ</h3>
         <div id="ownersListContainer"></div>
     </div>
 </div>
 
+<div id="addWorkModal" class="modal">
+    <div class="modal-content">
+        <span class="close-modal">&times;</span>
+        <h3 id="addWorkModalTitle">➕ Добавить произведение</h3>
+        <div class="form-group">
+            <label id="labelTitle">Название</label>
+            <input type="text" id="workTitle" placeholder="">
+        </div>
+        <div class="form-group">
+            <label id="labelPrice">Цена (€)</label>
+            <input type="text" id="workPrice" placeholder="">
+        </div>
+        <div class="form-group">
+            <label id="labelCollector">Коллекционер (если начинается с '!' — приватный)</label>
+            <input type="text" id="workCollector" value="Супруненко Андрей">
+        </div>
+        <div class="form-group">
+            <label id="labelImage">Фото (JPG/PNG)</label>
+            <input type="file" id="workImage" accept="image/jpeg,image/png">
+        </div>
+        <button id="confirmAddWork" class="add-btn" style="width:100%; background:#1e2b4f; color:white;">✅ Сохранить</button>
+    </div>
+</div>
+
+<div id="viewWorkModal" class="modal">
+    <div class="modal-content">
+        <span class="close-modal">&times;</span>
+        <div id="viewContent"></div>
+    </div>
+</div>
+
 <script>
-    let owners = [];
-    let currentOwnerId = null;
-    
-    async function loadOwners() {
-        try {
-            const response = await fetch('owners.json');
-            if (!response.ok) throw new Error('owners.json not found');
-            owners = await response.json();
-            if (!owners.length) owners = [];
-        } catch (error) {
-            console.warn('owners.json не загружен, создаём демо-владельца');
-            owners = [];
-        }
-        if (owners.length === 0) {
-            owners = [{
-                id: 1,
-                nameRu: "Владелец (пример)",
-                nameEn: "Owner (example)",
-                pdfViewUrl: "https://drive.google.com/file/d/13Z9w4_ur2c_CxgnIaeu1W5fSQeA_VNoK/preview",
-                pdfDownloadUrl: "https://drive.google.com/uc?export=download&id=13Z9w4_ur2c_CxgnIaeu1W5fSQeA_VNoK",
-                emoji: "📄"
-            }];
-        }
-        currentOwnerId = owners[0].id;
-        updateBookForOwner(currentOwnerId);
+    const MASTER_PASSWORD = "463z287";
+    let collectorsVisible = false;
+    let currentLang = 'ru';
+    let artworks = [];
+
+    function loadData() {
+        const saved = localStorage.getItem('hmsap_artworks');
+        if (saved) artworks = JSON.parse(saved);
+        else artworks = [];
+        renderGallery();
     }
-    
-    function updateBookForOwner(ownerId) {
-        const owner = owners.find(o => o.id == ownerId);
-        if (!owner) return;
-        const pdfFrame = document.getElementById('pdfFrame');
-        const downloadBtn = document.getElementById('downloadBtn');
-        if (pdfFrame) pdfFrame.src = owner.pdfViewUrl;
-        if (downloadBtn) downloadBtn.href = owner.pdfDownloadUrl;
+
+    function saveData() {
+        localStorage.setItem('hmsap_artworks', JSON.stringify(artworks));
     }
-    
-    function showOwnersList() {
-        const container = document.getElementById('ownersListContainer');
+
+    function addWork(title, price, collector, imageBase64) {
+        if (!title || !price || !imageBase64) {
+            alert(translations[currentLang].emptyFields);
+            return false;
+        }
+        const isPrivate = collector.startsWith('!');
+        const displayCollector = isPrivate ? collector.substring(1) : collector;
+        const newWork = {
+            id: Date.now(),
+            title: title,
+            price: price,
+            collector: displayCollector,
+            isPrivate: isPrivate,
+            imageData: imageBase64
+        };
+        artworks.push(newWork);
+        saveData();
+        renderGallery();
+        return true;
+    }
+
+    function deleteWork(id) {
+        if (confirm(translations[currentLang].deleteConfirm)) {
+            artworks = artworks.filter(w => w.id !== id);
+            saveData();
+            renderGallery();
+        }
+    }
+
+    function showWorkDetail(art) {
         const t = translations[currentLang];
+        const collectorName = art.collector || '—';
+        const isPrivate = art.isPrivate;
+        const showCollector = collectorsVisible || !isPrivate;
+        const collectorHtml = showCollector ? `<p><strong>🏛️ ${t.collectorLabel}:</strong> ${escapeHtml(collectorName)}</p>` : `<p><strong>🔒 ${t.collectorLabel}:</strong> ${t.collectorHidden}</p>`;
+        const content = `
+            <img src="${art.imageData}" alt="${escapeHtml(art.title)}">
+            <h3>${escapeHtml(art.title)}</h3>
+            <p><strong>💰 ${t.priceLabel}:</strong> ${art.price} €</p>
+            ${collectorHtml}
+        `;
+        document.getElementById('viewContent').innerHTML = content;
+        document.getElementById('viewWorkModal').classList.add('active');
+    }
+
+    function renderGallery() {
+        const container = document.getElementById('galleryGrid');
         if (!container) return;
-        if (owners.length === 0) {
-            container.innerHTML = `<p style="padding:20px; text-align:center;">${t.noOwners}</p>`;
-        } else {
-            container.innerHTML = owners.map(owner => `
-                <div class="owner-item" data-owner-id="${owner.id}">
-                    <div class="owner-emoji">${owner.emoji || '📄'}</div>
-                    <div class="owner-name">${currentLang === 'ru' ? owner.nameRu : owner.nameEn}</div>
-                </div>
-            `).join('');
-            document.querySelectorAll('.owner-item').forEach(el => {
-                el.addEventListener('click', () => {
-                    const newOwnerId = parseInt(el.dataset.ownerId);
-                    currentOwnerId = newOwnerId;
-                    updateBookForOwner(currentOwnerId);
-                    document.getElementById('ownerModal').classList.remove('active');
-                });
-            });
+        if (artworks.length === 0) {
+            container.innerHTML = `<div style="text-align:center; padding:2rem;">${translations[currentLang].noWorks}</div>`;
+            return;
         }
+        container.innerHTML = artworks.map(art => {
+            const showCollector = collectorsVisible || !art.isPrivate;
+            const collectorHtml = showCollector ? `<div class="art-collector">🏛️ ${escapeHtml(art.collector)}</div>` : `<div class="art-collector collector-hidden">🔒 ${translations[currentLang].collectorHidden}</div>`;
+            return `
+                <div class="art-card" data-id="${art.id}">
+                    <button class="delete-work" data-id="${art.id}">🗑</button>
+                    <div class="art-image"><img src="${art.imageData}" alt="${escapeHtml(art.title)}"></div>
+                    <div class="art-info">
+                        <div class="art-title">${escapeHtml(art.title)}</div>
+                        <div class="art-price">💰 ${art.price} €</div>
+                        ${collectorHtml}
+                    </div>
+                </div>
+            `;
+        }).join('');
+        document.querySelectorAll('.art-card').forEach(card => {
+            const id = parseInt(card.dataset.id);
+            card.addEventListener('click', (e) => {
+                if (e.target.classList.contains('delete-work')) return;
+                const work = artworks.find(w => w.id === id);
+                if (work) showWorkDetail(work);
+            });
+        });
+        document.querySelectorAll('.delete-work').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                const id = parseInt(btn.dataset.id);
+                deleteWork(id);
+            });
+        });
+    }
+
+    function renderWorkList() {
+        const t = translations[currentLang];
+        const container = document.getElementById('ownersListContainer');
+        if (!container) return;
+        if (artworks.length === 0) {
+            container.innerHTML = `<div style="padding:20px; text-align:center;">${t.noWorks}</div>`;
+            return;
+        }
+        container.innerHTML = artworks.map(art => {
+            const showCollector = collectorsVisible || !art.isPrivate;
+            const collectorDisplay = showCollector ? escapeHtml(art.collector) : `🔒 ${t.collectorHidden}`;
+            return `
+                <div class="work-list-item">
+                    <div class="work-list-title">${escapeHtml(art.title)} <span class="work-list-price">💰 ${art.price} €</span></div>
+                    <div class="work-list-collector">🏛️ ${collectorDisplay}</div>
+                </div>
+            `;
+        }).join('');
+    }
+
+    function showWorkListModal() {
+        renderWorkList();
         document.getElementById('ownerModal').classList.add('active');
     }
-    
+
+    function escapeHtml(str) { return str.replace(/[&<>]/g, m => m==='&'?'&amp;': m==='<'?'&lt;': '&gt;'); }
+
+    function toggleCollectorsVisibility() {
+        const t = translations[currentLang];
+        const hasPrivate = artworks.some(art => art.isPrivate === true);
+        if (!hasPrivate) {
+            alert(t.noPrivateCollectors);
+            return;
+        }
+        if (!collectorsVisible) {
+            const pwd = prompt(t.enterPassword);
+            if (pwd === MASTER_PASSWORD) {
+                collectorsVisible = true;
+                renderGallery();
+                renderWorkList();
+                document.getElementById('revealCollectorsBtn').style.opacity = '0.7';
+            } else alert(t.wrongPassword);
+        } else {
+            collectorsVisible = false;
+            renderGallery();
+            renderWorkList();
+            document.getElementById('revealCollectorsBtn').style.opacity = '1';
+        }
+    }
+
+    // ========== UI ==========
+    document.getElementById('galleryToggle').addEventListener('click', () => {
+        document.getElementById('galleryToggle').classList.add('active');
+        document.getElementById('bookToggle').classList.remove('active');
+        document.getElementById('galleryContainer').classList.remove('hidden');
+        document.getElementById('bookContainer').classList.add('hidden');
+    });
+    document.getElementById('bookToggle').addEventListener('click', () => {
+        document.getElementById('bookToggle').classList.add('active');
+        document.getElementById('galleryToggle').classList.remove('active');
+        document.getElementById('galleryContainer').classList.add('hidden');
+        document.getElementById('bookContainer').classList.remove('hidden');
+    });
+
+    const addModal = document.getElementById('addWorkModal');
+    document.getElementById('addButton').addEventListener('click', () => {
+        document.getElementById('workTitle').value = '';
+        document.getElementById('workPrice').value = '';
+        document.getElementById('workCollector').value = 'Супруненко Андрей';
+        document.getElementById('workImage').value = '';
+        addModal.classList.add('active');
+    });
+    document.getElementById('confirmAddWork').addEventListener('click', () => {
+        const title = document.getElementById('workTitle').value.trim();
+        const price = document.getElementById('workPrice').value.trim();
+        let collector = document.getElementById('workCollector').value.trim();
+        if (!collector) collector = 'Супруненко Андрей';
+        const fileInput = document.getElementById('workImage');
+        if (!fileInput.files.length) {
+            alert(translations[currentLang].needImage);
+            return;
+        }
+        const file = fileInput.files[0];
+        const reader = new FileReader();
+        reader.onload = (e) => {
+            const imageData = e.target.result;
+            if (addWork(title, price, collector, imageData)) {
+                addModal.classList.remove('active');
+            }
+        };
+        reader.readAsDataURL(file);
+    });
+
     const translations = {
         ru: {
-            gallery: 'Галерея',
-            book: 'Книга',
-            galleryCard: 'работы и цены',
-            download: 'Скачать PDF',
-            pwaButton: 'Установить',
+            gallery: 'Галерея', book: 'Книга', download: 'Скачать PDF', pwaButton: 'Установить',
             pwaTooltip: '💡 Нажмите — установите как приложение.\n• Chrome/Edge: появится диалог.\n• iPhone: Поделиться → На экран «Домой».',
-            instructions: `
-                <h4>📘 Как добавить свою работу</h4>
-                <p><strong>Для продавцов:</strong></p>
-                <ul>
-                    <li>Свяжитесь с нами по контактам ниже, чтобы разместить ваше искусство.</li>
-                    <li>Вы можете прислать фото (даже с телефона), название, цену и ссылку на внешний сайт.</li>
-                    <li>Мы добавим вашу работу в PDF-каталог и на сайт.</li>
-                </ul>
-                <p><strong>Для покупателей:</strong></p>
-                <ul>
-                    <li>Нажмите на карточку "работы и цены" или откройте PDF.</li>
-                    <li>Для покупки свяжитесь с нами напрямую: напишите в WhatsApp, Telegram или по email.</li>
-                </ul>
-                <p><strong>Контакты:</strong><br>
-                📞 +357 99 453575<br>
-                ✉️ gavrosh2007@gmail.com<br>
-                💬 Telegram: @hermesmcbot</p>
-                <p style="font-size:0.8rem;">Все заявки обрабатываются вручную. Мы свяжемся с вами.</p>
-            `,
-            listButton: 'Список',
-            modalOwnersTitle: '📋 Выберите владельца',
-            noOwners: 'Список владельцев пуст. Добавьте данные в файл owners.json'
+            instructions: `<h4>📘 Как добавить свою работу</h4><p><strong>Для продавцов:</strong></p><ul><li>Нажмите "Добавить работу" и заполните форму.</li><li>Если имя коллекционера начинается с '!', оно будет скрыто до ввода пароля.</li><li>Вы можете загрузить фото с устройства (JPG/PNG).</li></ul><p><strong>Для покупателей:</strong></p><ul><li>Просматривайте работы в галерее.</li><li>Чтобы увидеть имена коллекционеров, нажмите кнопку "Показать имена коллекционеров" и введите пароль.</li></ul><p><strong>Контакты:</strong><br>📞 +357 99 453575<br>✉️ gavrosh2007@gmail.com<br>💬 Telegram: @hermesmcbot</p>`,
+            listButton: 'Список работ', addButtonText: 'Добавить работу', modalOwnersTitle: '📋 Список добавленных работ',
+            noWorks: 'Нет произведений. Добавьте первое!',
+            passwordPlaceholder: 'Введите пароль для доступа', unlockBtn: '🔓 Показать', wrongPassword: '❌ Неверный пароль',
+            emptyFields: 'Заполните название, цену и загрузите фото', needImage: 'Загрузите фото',
+            addWorkModalTitle: '➕ Добавить произведение', labelTitle: 'Название', labelPrice: 'Цена (€)',
+            labelCollector: 'Коллекционер (если начинается с "!" — приватный)', labelImage: 'Фото (JPG/PNG)',
+            revealBtnText: 'Показать имена коллекционеров', enterPassword: 'Введите пароль для отображения имён коллекционеров',
+            collectorHidden: 'Коллекционер скрыт (введите пароль)', deleteConfirm: 'Удалить эту работу?',
+            priceLabel: 'Цена', collectorLabel: 'Коллекционер', noPrivateCollectors: 'Нет приватных коллекционеров'
         },
         en: {
-            gallery: 'Gallery',
-            book: 'Book',
-            galleryCard: 'works and prices',
-            download: 'Download PDF',
-            pwaButton: 'Install',
+            gallery: 'Gallery', book: 'Book', download: 'Download PDF', pwaButton: 'Install',
             pwaTooltip: '💡 Click — install as app.\n• Chrome/Edge: dialog appears.\n• iPhone: Share → Add to Home Screen.',
-            instructions: `
-                <h4>📘 How to add your artwork</h4>
-                <p><strong>For sellers:</strong></p>
-                <ul>
-                    <li>Contact us via the details below to list your art.</li>
-                    <li>You can send a photo (even from phone), title, price and external link.</li>
-                    <li>We will add your work to the PDF catalog and website.</li>
-                </ul>
-                <p><strong>For buyers:</strong></p>
-                <ul>
-                    <li>Click on "works and prices" card or open the PDF.</li>
-                    <li>To purchase, contact us directly via WhatsApp, Telegram or email.</li>
-                </ul>
-                <p><strong>Contacts:</strong><br>
-                📞 +357 99 453575<br>
-                ✉️ gavrosh2007@gmail.com<br>
-                💬 Telegram: @hermesmcbot</p>
-                <p style="font-size:0.8rem;">All requests are handled manually. We will contact you.</p>
-            `,
-            listButton: 'List',
-            modalOwnersTitle: '📋 Select owner',
-            noOwners: 'Owner list is empty. Add data to owners.json'
+            instructions: `<h4>📘 How to add your artwork</h4><p><strong>For sellers:</strong></p><ul><li>Click "Add artwork" and fill the form.</li><li>If collector's name starts with '!', it will be hidden until password entered.</li><li>You can upload a photo (JPG/PNG).</li></ul><p><strong>For buyers:</strong></p><ul><li>Browse artworks in the gallery.</li><li>To see collector names, click "Show collector names" and enter the password.</li></ul><p><strong>Contacts:</strong><br>📞 +357 99 453575<br>✉️ gavrosh2007@gmail.com<br>💬 Telegram: @hermesmcbot</p>`,
+            listButton: 'Works list', addButtonText: 'Add artwork', modalOwnersTitle: '📋 List of added works',
+            noWorks: 'No artworks. Add the first one!',
+            passwordPlaceholder: 'Enter password to access', unlockBtn: '🔓 Show', wrongPassword: '❌ Wrong password',
+            emptyFields: 'Fill title, price and upload photo', needImage: 'Upload photo',
+            addWorkModalTitle: '➕ Add artwork', labelTitle: 'Title', labelPrice: 'Price (€)',
+            labelCollector: 'Collector (if starts with "!" — private)', labelImage: 'Photo (JPG/PNG)',
+            revealBtnText: 'Show collector names', enterPassword: 'Enter password to reveal collector names',
+            collectorHidden: 'Collector hidden (enter password)', deleteConfirm: 'Delete this artwork?',
+            priceLabel: 'Price', collectorLabel: 'Collector', noPrivateCollectors: 'No private collectors'
         }
     };
-    
-    let currentLang = 'ru';
-    
+
     function setLanguage(lang) {
         currentLang = lang;
         const t = translations[lang];
         document.getElementById('galleryToggle').innerHTML = t.gallery;
         document.getElementById('bookToggle').innerHTML = t.book;
-        document.getElementById('galleryCardText').innerHTML = t.galleryCard;
         document.getElementById('downloadBtn').innerHTML = t.download;
         document.getElementById('pwaButtonText').innerHTML = t.pwaButton;
         document.getElementById('pwaTooltip').innerHTML = t.pwaTooltip;
         document.getElementById('instructionsBlock').innerHTML = t.instructions;
         document.getElementById('listButtonText').innerHTML = t.listButton;
+        document.getElementById('addButtonText').innerHTML = t.addButtonText;
         document.getElementById('modalOwnersTitle').innerHTML = t.modalOwnersTitle;
+        document.getElementById('addWorkModalTitle').innerHTML = t.addWorkModalTitle;
+        document.getElementById('labelTitle').innerHTML = t.labelTitle;
+        document.getElementById('labelPrice').innerHTML = t.labelPrice;
+        document.getElementById('labelCollector').innerHTML = t.labelCollector;
+        document.getElementById('labelImage').innerHTML = t.labelImage;
+        document.getElementById('revealBtnText').innerHTML = t.revealBtnText;
         document.querySelectorAll('.lang-btn').forEach(btn => {
-            btn.classList.remove('active');
-            if (btn.dataset.lang === lang) btn.classList.add('active');
+            btn.classList.toggle('active', btn.dataset.lang === lang);
         });
+        document.getElementById('footer-ru').style.display = (lang === 'ru') ? 'block' : 'none';
+        document.getElementById('footer-en').style.display = (lang === 'en') ? 'block' : 'none';
+        renderGallery();
+        if (document.getElementById('ownerModal').classList.contains('active')) renderWorkList();
     }
-    
-    const galleryToggle = document.getElementById('galleryToggle');
-    const bookToggle = document.getElementById('bookToggle');
-    const galleryCardWrapper = document.getElementById('galleryCardWrapper');
-    const bookContainer = document.getElementById('bookContainer');
-    
-    galleryToggle.addEventListener('click', () => {
-        galleryToggle.classList.add('active');
-        bookToggle.classList.remove('active');
-        galleryCardWrapper.classList.remove('hidden');
-        bookContainer.classList.add('hidden');
-    });
-    bookToggle.addEventListener('click', () => {
-        bookToggle.classList.add('active');
-        galleryToggle.classList.remove('active');
-        galleryCardWrapper.classList.add('hidden');
-        bookContainer.classList.remove('hidden');
-    });
-    
+
     document.querySelectorAll('.lang-btn').forEach(btn => {
-        btn.addEventListener('click', (e) => setLanguage(e.target.dataset.lang));
+        btn.addEventListener('click', () => setLanguage(btn.dataset.lang));
     });
-    
-    document.getElementById('listButton').addEventListener('click', showOwnersList);
-    
-    const modal = document.getElementById('ownerModal');
-    modal.querySelector('.close-modal').addEventListener('click', () => modal.classList.remove('active'));
-    window.addEventListener('click', (e) => { if (e.target === modal) modal.classList.remove('active'); });
-    
+
+    document.getElementById('listButton').addEventListener('click', showWorkListModal);
+    document.getElementById('revealCollectorsBtn').addEventListener('click', toggleCollectorsVisibility);
+
+    const ownerModal = document.getElementById('ownerModal');
+    ownerModal.querySelector('.close-modal').addEventListener('click', () => ownerModal.classList.remove('active'));
+    const viewModal = document.getElementById('viewWorkModal');
+    viewModal.querySelector('.close-modal').addEventListener('click', () => viewModal.classList.remove('active'));
+    window.addEventListener('click', (e) => { if (e.target === ownerModal) ownerModal.classList.remove('active'); });
+    window.addEventListener('click', (e) => { if (e.target === addModal) addModal.classList.remove('active'); });
+    window.addEventListener('click', (e) => { if (e.target === viewModal) viewModal.classList.remove('active'); });
+
+    document.querySelectorAll('.close-modal').forEach(btn => {
+        btn.addEventListener('click', () => {
+            ownerModal.classList.remove('active');
+            addModal.classList.remove('active');
+            viewModal.classList.remove('active');
+        });
+    });
+
     let deferredPrompt;
-    window.addEventListener('beforeinstallprompt', (e) => {
-        e.preventDefault();
-        deferredPrompt = e;
-    });
+    window.addEventListener('beforeinstallprompt', (e) => { e.preventDefault(); deferredPrompt = e; });
     document.getElementById('pwaInstallIcon').addEventListener('click', async () => {
         if (deferredPrompt) {
             deferredPrompt.prompt();
             await deferredPrompt.userChoice;
             deferredPrompt = null;
         } else {
-            alert('Для установки: Chrome/Edge — значок ⬇️ в адресной строке, iPhone — Поделиться → На экран "Домой"');
+            alert(currentLang === 'ru' ? 'Для установки: Chrome/Edge — значок ⬇️ в адресной строке, iPhone — Поделиться → На экран "Домой"' : 'To install: Chrome/Edge — ⬇️ icon in address bar, iPhone — Share → Add to Home Screen');
         }
     });
-    
-    if ('serviceWorker' in navigator) {
-        navigator.serviceWorker.register('sw.js', { scope: './' })
-            .then(reg => console.log('SW registered'))
-            .catch(err => console.error('SW failed', err));
-    }
-    
-    loadOwners().then(() => {
-        setLanguage('ru');
-    });
+    if ('serviceWorker' in navigator) navigator.serviceWorker.register('sw.js', { scope: './' }).catch(err => console.warn('SW error:', err));
+
+    loadData();
+    setLanguage('ru');
 </script>
 </body>
 </html>
